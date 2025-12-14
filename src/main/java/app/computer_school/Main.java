@@ -1,11 +1,13 @@
 package app.computer_school;
 
+import app.computer_school.models.User;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String args[]) {
-        User user = new User(1232);
+        ConsoleController controller = new ConsoleController();
 
-        int asdasd = user.getId();
+        controller.run();
     }
 }

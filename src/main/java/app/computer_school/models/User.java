@@ -1,4 +1,4 @@
-package app.computer_school;
+package app.computer_school.models;
 
 public class User {
     protected int id;
