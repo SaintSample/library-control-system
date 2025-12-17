@@ -1,19 +1,37 @@
 package app.computer_school;
 
+import app.computer_school.system.database.DatabaseConnection;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import app.computer_school.system.database.DatabaseConnection;
 
 public class ConsoleController
 {
     private final Scanner scanner;
+    private final DatabaseConnection connection;
 
-    public ConsoleController()
-    {
+    public ConsoleController() throws SQLException {
         this.scanner = new Scanner(System.in);
+
+        this.connection = DatabaseConnection.getInstance();
     }
 
-    public void run() {
+    public void run() throws SQLException {
+        ResultSet set = this.connection
+                .getConnection()
+                .prepareStatement("SELECT full_name FROM users LIMIT 20")
+                .executeQuery();
+
+        while (set.next()) {
+            String fullName = set.getString("full_name");
+
+            System.out.println(fullName);
+        }
+
         this.printWelcome();
 
         boolean shouldRun = true;
