@@ -9,6 +9,8 @@ public class User {
     protected String phone;
     protected String email;
 
+    public User() {}
+
     public User(
             int id,
             String firstname,
