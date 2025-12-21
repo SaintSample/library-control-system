@@ -1,11 +1,11 @@
 package app.computer_school.models;
 
 public class Book {
-    protected int id;
+    protected Long id;
     protected String title;
-    protected int authorId;
-    protected int publishingId;
+    protected Long authorId;
+    protected Long publishingId;
     protected String publishingDate;
-    protected int genreId;
+    protected Long genreId;
     protected int count;
 }

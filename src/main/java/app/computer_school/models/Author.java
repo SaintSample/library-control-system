@@ -1,6 +1,6 @@
 package app.computer_school.models;
 
 public class Author {
-    protected int id;
+    protected Long id;
     protected String name;
 }
