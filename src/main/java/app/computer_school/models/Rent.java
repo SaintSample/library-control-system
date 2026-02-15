@@ -1,8 +1,8 @@
 package app.computer_school.models;
 
 public class Rent {
-    protected int id;
-    protected int userId;
-    protected int bookId;
+    protected Long id;
+    protected Long userId;
+    protected Long bookId;
     protected String returnDate;
 }
