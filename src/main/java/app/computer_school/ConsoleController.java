@@ -1,5 +1,7 @@
 package app.computer_school;
 
+import app.computer_school.mappers.UserMapper;
+import app.computer_school.models.User;
 import app.computer_school.system.database.DatabaseConnection;
 
 import java.sql.ResultSet;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import app.computer_school.system.database.DatabaseConnection;
+import app.computer_school.system.database.QueryBuilder;
 
 public class ConsoleController
 {
@@ -21,6 +24,12 @@ public class ConsoleController
     }
 
     public void run() throws SQLException {
+        QueryBuilder<User> builder = new QueryBuilder<>(
+                User.class,
+                new UserMapper()
+        );
+        User.query()
+
         ResultSet set = this.connection
                 .getConnection()
                 .prepareStatement("SELECT full_name FROM users LIMIT 20")

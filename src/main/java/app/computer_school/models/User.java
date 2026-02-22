@@ -1,6 +1,9 @@
 package app.computer_school.models;
 
-public class User {
+import app.computer_school.mappers.UserMapper;
+import app.computer_school.system.database.IModelMapper;
+
+public class User extends Model {
     protected Long id;
     protected String firstname;
     protected String lastname;
@@ -35,6 +38,11 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public IModelMapper<? extends Model> getMapper() {
+        return new UserMapper();
     }
 
     public String getFirstname() {
