@@ -1,7 +1,12 @@
 package app.computer_school.models;
 
 import app.computer_school.mappers.UserMapper;
+import app.computer_school.system.database.DBAL;
 import app.computer_school.system.database.IModelMapper;
+import app.computer_school.system.database.QueryBuilder;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class User extends Model {
     protected Long id;
@@ -42,7 +47,28 @@ public class User extends Model {
 
     @Override
     public IModelMapper<? extends Model> getMapper() {
-        return new UserMapper();
+        return new UserMapper(); // Возвращает свой маппер
+    }
+
+    public static QueryBuilder<User> query() {
+        User tempInstance = new User(); // Создаём временный экземпляр
+        @SuppressWarnings("unchecked")
+        IModelMapper<User> mapper = (IModelMapper<User>) tempInstance.getMapper(); // Получаем маппер
+        return new QueryBuilder<>(User.class, mapper); // Возвращаем QueryBuilder
+    }
+
+    public static User findById(Long id) throws SQLException {
+        User tempInstance = new User();
+        @SuppressWarnings("unchecked")
+        IModelMapper<User> mapper = (IModelMapper<User>) tempInstance.getMapper();
+        return DBAL.getById(id, mapper);
+    }
+
+    public static List<User> all() throws SQLException {
+        User tempInstance = new User();
+        @SuppressWarnings("unchecked")
+        IModelMapper<User> mapper = (IModelMapper<User>) tempInstance.getMapper();
+        return DBAL.findAll(mapper);
     }
 
     public String getFirstname() {
@@ -91,5 +117,15 @@ public class User extends Model {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s %s %s",
+                this.getLastname(),
+                this.getFirstname(),
+                this.getMiddlename()
+        );
     }
 }

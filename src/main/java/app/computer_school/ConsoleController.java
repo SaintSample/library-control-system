@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import app.computer_school.system.database.DatabaseConnection;
 import app.computer_school.system.database.QueryBuilder;
@@ -24,22 +25,16 @@ public class ConsoleController
     }
 
     public void run() throws SQLException {
-        QueryBuilder<User> builder = new QueryBuilder<>(
-                User.class,
-                new UserMapper()
-        );
-        User.query()
 
-        ResultSet set = this.connection
-                .getConnection()
-                .prepareStatement("SELECT full_name FROM users LIMIT 20")
-                .executeQuery();
+        QueryBuilder<User> builder = User.query()
+                .where("lastname", "ilike", "%Параво%")
 
-        while (set.next()) {
-            String fullName = set.getString("full_name");
+        List<User> result = builder.find();
 
-            System.out.println(fullName);
+        for (User user : result) {
+            System.out.println(user);
         }
+
 
         this.printWelcome();
 

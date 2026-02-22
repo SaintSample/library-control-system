@@ -9,17 +9,29 @@ public class DatabaseConnection {
 
     private static DatabaseConnection instance; // Единственный экземпляр класса
     private Connection connection; // Объект соединения с БД
+    private final String host;
+    private final String port;
     private final String url;
     private final String user;
     private final String password;
+    private final String db;
 
     private DatabaseConnection() throws SQLException {
         Dotenv dotenv = Dotenv.load();
 
         // Получаем параметры подключения из .env
-        this.url = dotenv.get("DB_URL");
-        this.user = dotenv.get("DB_USER");
-        this.password = dotenv.get("DB_PASSWORD");
+        this.user = dotenv.get("DATABASE_USER");
+        this.password = dotenv.get("DATABASE_PASSWORD");
+        this.host = dotenv.get("DATABASE_HOST");
+        this.port = dotenv.get("DATABASE_PORT");
+        this.db = dotenv.get("DATABASE_DB");
+
+        this.url = String.format(
+                "jdbc:postgresql://%s:%s/%s",
+                this.host,
+                this.port,
+                this.db
+        );
 
         if (this.url == null || this.user == null || this.password == null) {
             throw new SQLException("Не удалось загрузить параметры подключения из .env файла.");

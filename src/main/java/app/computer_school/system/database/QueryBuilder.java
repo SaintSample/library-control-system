@@ -1,5 +1,6 @@
 package app.computer_school.system.database;
 
+import app.computer_school.models.Model;
 import app.computer_school.system.database.DBAL;
 import app.computer_school.system.database.IModelMapper;
 import app.computer_school.system.database.DatabaseConnection;
@@ -15,7 +16,7 @@ import java.util.LinkedHashMap; // LinkedHashMap сохраняет порядо
 
 public class QueryBuilder<T> {
     private final Class<T> modelClass;
-    private final IModelMapper<T> mapper;
+    private final IModelMapper<? extends Model> mapper;
     private final String tableName;
 
     // --- Параметры запроса ---
@@ -25,7 +26,7 @@ public class QueryBuilder<T> {
     private Integer limitValue = null;
     // --- --- --- --- --- --- ---
 
-    public QueryBuilder(Class<T> modelClass, IModelMapper<T> mapper) {
+    public QueryBuilder(Class<T> modelClass, IModelMapper<? extends Model> mapper) {
         this.modelClass = modelClass;
         this.mapper = mapper;
         this.tableName = mapper.getTableName();
@@ -115,7 +116,7 @@ public class QueryBuilder<T> {
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                T model = mapper.fromResultSet(rs); // Используем маппер для создания модели
+                T model = (T)mapper.fromResultSet(rs); // Используем маппер для создания модели
                 results.add(model);
             }
         }
