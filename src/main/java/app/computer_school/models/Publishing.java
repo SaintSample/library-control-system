@@ -1,6 +1,6 @@
 package app.computer_school.models;
 
-public class Puplishing {
+public class Publishing {
     protected Long id;
     protected String name;
 }

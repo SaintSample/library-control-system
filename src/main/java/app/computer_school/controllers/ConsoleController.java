@@ -1,16 +1,13 @@
-package app.computer_school;
+package app.computer_school.controllers;
 
-import app.computer_school.mappers.UserMapper;
 import app.computer_school.models.User;
 import app.computer_school.system.database.DatabaseConnection;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import app.computer_school.system.database.DatabaseConnection;
+
 import app.computer_school.system.database.QueryBuilder;
 
 public class ConsoleController
@@ -34,6 +31,8 @@ public class ConsoleController
         for (User user : result) {
             System.out.println(user);
         }
+
+
 
         this.printWelcome();
 

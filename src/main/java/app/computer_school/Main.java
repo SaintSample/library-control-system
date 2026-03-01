@@ -1,7 +1,7 @@
 package app.computer_school;
 
-import app.computer_school.models.User;
-import io.github.cdimascio.dotenv.Dotenv;
+import app.computer_school.controllers.ConsoleController;
+import app.computer_school.controllers.UserConsoleController;
 
 import java.sql.SQLException;
 
@@ -9,9 +9,7 @@ import java.sql.SQLException;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String args[]) throws SQLException {
-        ConsoleController controller = new ConsoleController();
-
-
+        UserConsoleController controller = new UserConsoleController();
 
         controller.run();
     }
