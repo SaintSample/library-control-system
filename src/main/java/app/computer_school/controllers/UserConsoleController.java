@@ -12,7 +12,6 @@ public class UserConsoleController {
             QueryBuilder<User> builder = User.query();
 
             List<User> result = builder.find();
-
             for (User user : result) {
                 System.out.println(user);
             }
